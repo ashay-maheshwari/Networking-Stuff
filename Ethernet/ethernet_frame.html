@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Ethernet Frame </title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="Ethernet Frame "/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="March 11, 2016"/>
+<meta name="author" content="Ashay Maheshwari"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">Ethernet Frame </h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 Ethernet frame</a>
+<ul>
+<li><a href="#sec-1-1">1.1 Destination MAC Address (6 bytes)</a></li>
+<li><a href="#sec-1-2">1.2 Source MAC Address (6 bytes)</a></li>
+<li><a href="#sec-1-3">1.3 Type (2 bytes)</a></li>
+<li><a href="#sec-1-4">1.4 Data/Payload (variable from 46 bytes to 1500 bytes)</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Ethernet frame</h2>
+<div class="outline-text-2" id="text-1">
+
+<p>For what Ethernet is , I would like you to visit <a href="http://searchnetworking.techtarget.com/definition/Ethernet">http://searchnetworking.techtarget.com/definition/Ethernet</a>.
+What more important is to understand what are the fields/sections of Ethernet frame. <br/>
+See the image given below -
+</p>
+
+<div class="figure">
+<p><img src="./images/ethernet_Frame.png"  alt="./images/ethernet_Frame.png" /></p>
+<p>Ethernet frame format</p>
+</div>
+
+<p>
+First and foremost, the most important thing is that an Ethernet Frame comes into action at Data Link Layer of OSI model. 
+Everything which will be carried away in the network, weather it is a video, audio, text message, anything, will be carried in the Ethernet frame. <br/>
+</p>
+<p>
+From fields/sections given above, we will only care about the following -
+</p>
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Destination MAC Address (6 bytes)</h3>
+<div class="outline-text-3" id="text-1-1">
+
+<p>   This is the MAC address of the destination machine where the frame is to be sent.
+</p></div>
+
+</div>
+
+<div id="outline-container-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Source MAC Address (6 bytes)</h3>
+<div class="outline-text-3" id="text-1-2">
+
+<p>   This is the MAC address of the machine which is sending the frane.
+</p></div>
+
+</div>
+
+<div id="outline-container-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Type (2 bytes)</h3>
+<div class="outline-text-3" id="text-1-3">
+
+<p>   Type field is used to carry the information about what type of Data packet is geeting carried in Ethernet Frame.
+   For every frame, it will have a specific value in hexadecimal format. Two most important packets carried by Ethernet Frame are - <br/>
+</p><ol>
+<li>ARP Packet - When an ARP (Request/Respone) packet is carried in data section of Ethernet frame, Ethernet type has value 0x0806. <br/>
+</li>
+<li>IP Packet - When an IP packet is carried in data section of Ethernet frame, Ethernet type has value 0x0800. 
+</li>
+</ol>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Data/Payload (variable from 46 bytes to 1500 bytes)</h3>
+<div class="outline-text-3" id="text-1-4">
+
+<p>   This section carries the data in the Ethernet frame. This data can be any packet from layer above the Data Link Layer of the frame. 
+   When an Ethernet frame is carrying nothing, then the size of the Data section is 46 bytes. The maximum data it can carry is of size 1500 bytes.
+</p>
+<p>  
+Lets us consider a simple connectivity between two computers (See image below ) -
+</p>
+<div class="figure">
+<p><img src="./images/sample_topology.png"  alt="./images/sample_topology.png" /></p>
+<p>Sample topology</p>
+</div>
+
+
+<p>
+If PC1 wants to communicate with PC2, then Pc1 will form an Ethernet frame and will send it on to the wire. <br/>
+PC1 will then fill values in the frame which will look like the one given below.
+</p>
+<div class="figure">
+<p><img src="./images/custom_frame.jpg"  alt="./images/custom_frame.jpg" /></p>
+<p>Custom frame</p>
+</div>
+
+
+<ul>
+<li>Ethernet frame formed by PC1 to send it to PC2
+</li>
+<li>First block is the MAC address of Destination machine, i.e. PC2. 
+</li>
+<li>Second block is the MAC address of Source machine, i.e. PC1. 
+</li>
+<li>Third block is the DATA or payload section.
+</li>
+</ul>
+
+
+<p>
+Note: There are some other fields, but for the sake of understanding, we can ignore them. <br/>
+</p>
+<p>
+A check sum will be calculated at both sender’s and receiver’s side, so as to confirm the integrity of data sent by sender.
+</p>
+<p>
+Now you can go ahead with my blog article on Address Resolution Protocol.
+</p></div>
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: March 11, 2016</p>
+<p class="author">Author: Ashay Maheshwari</p>
+<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>

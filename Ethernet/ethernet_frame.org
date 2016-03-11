@@ -1,0 +1,54 @@
+#+Title: Ethernet Frame 
+#+Date: March 11, 2016
+#+Author: Ashay Maheshwari
+
+* Ethernet frame
+For what Ethernet is , I would like you to visit http://searchnetworking.techtarget.com/definition/Ethernet.
+What more important is to understand what are the fields/sections of Ethernet frame. \\
+See the image given below -
+
+#+CAPTION: Ethernet frame format
+#+NAME: fig:eth1
+[[./images/ethernet_Frame.png]]
+
+First and foremost, the most important thing is that an Ethernet Frame comes into action at Data Link Layer of OSI model. 
+Everything which will be carried away in the network, weather it is a video, audio, text message, anything, will be carried in the Ethernet frame. \\
+
+From fields/sections given above, we will only care about the following -
+** Destination MAC Address (6 bytes)
+   This is the MAC address of the destination machine where the frame is to be sent.
+** Source MAC Address (6 bytes)
+   This is the MAC address of the machine which is sending the frane.
+** Type (2 bytes)
+   Type field is used to carry the information about what type of Data packet is geeting carried in Ethernet Frame.
+   For every frame, it will have a specific value in hexadecimal format. Two most important packets carried by Ethernet Frame are - \\
+   1. ARP Packet - When an ARP (Request/Respone) packet is carried in data section of Ethernet frame, Ethernet type has value 0x0806. \\
+   2. IP Packet - When an IP packet is carried in data section of Ethernet frame, Ethernet type has value 0x0800. 
+
+** Data/Payload (variable from 46 bytes to 1500 bytes)
+   This section carries the data in the Ethernet frame. This data can be any packet from layer above the Data Link Layer of the frame. 
+   When an Ethernet frame is carrying nothing, then the size of the Data section is 46 bytes. The maximum data it can carry is of size 1500 bytes.
+  
+Lets us consider a simple connectivity between two computers (See image below ) -
+#+CAPTION: Sample topology
+#+NAME: fig:eth2
+[[./images/sample_topology.png]]
+
+
+If PC1 wants to communicate with PC2, then Pc1 will form an Ethernet frame and will send it on to the wire. \\
+PC1 will then fill values in the frame which will look like the one given below.
+#+CAPTION: Custom frame
+#+NAME: fig:eth3
+[[./images/custom_frame.jpg]]
+
+
+- Ethernet frame formed by PC1 to send it to PC2
+- First block is the MAC address of Destination machine, i.e. PC2. 
+- Second block is the MAC address of Source machine, i.e. PC1. 
+- Third block is the DATA or payload section.
+
+Note: There are some other fields, but for the sake of understanding, we can ignore them. \\
+
+A check sum will be calculated at both sender’s and receiver’s side, so as to confirm the integrity of data sent by sender.
+
+Now you can go ahead with my blog article on Address Resolution Protocol.
