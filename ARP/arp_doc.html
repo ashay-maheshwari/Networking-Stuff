@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Address Resolution Protocol (ARP)</title>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta name="title" content="Address Resolution Protocol (ARP)"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="March 12, 2016"/>
+<meta name="author" content="Ashay Maheshwari"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">Address Resolution Protocol (ARP)</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 Introduction</a>
+<ul>
+<li><a href="#sec-1-1">1.1 Used for</a></li>
+<li><a href="#sec-1-2">1.2 Used by</a></li>
+<li><a href="#sec-1-3">1.3 How does a networking device knows that ARP is to be resolved ?</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2 Type of ARP packet</a>
+<ul>
+<li><a href="#sec-2-1">2.1 ARP request packet</a></li>
+<li><a href="#sec-2-2">2.2 ARP response packet</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3 ARP Packet format</a></li>
+<li><a href="#sec-4">4 ARP resolution Process</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+
+<p>  ARP is a protocol which is used for resolving MAC address of a
+  machine whose IP address is known.
+</p>
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Used for</h3>
+<div class="outline-text-3" id="text-1-1">
+
+<p>   Resolving MAC address when IP address is known. An Ethernet frame
+   cannot be sent to a specific machine if its MAC address is not
+   known.
+</p></div>
+
+</div>
+
+<div id="outline-container-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Used by</h3>
+<div class="outline-text-3" id="text-1-2">
+
+<p>   Networking devices, like end hosts, routers etc
+</p></div>
+
+</div>
+
+<div id="outline-container-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> How does a networking device knows that ARP is to be resolved ?</h3>
+<div class="outline-text-3" id="text-1-3">
+
+<p>   Every device maintains an ARP table or ARP cache. Whenever it needs
+   MAC address binded to sepecific IP address, it first refers its ARP
+   table and if an entry is not found in that table, ARP is
+   resolved. <br/>
+   For example -
+</p>
+
+
+<pre class="example">#ARP Command on linux machine 
+aashay@aashay ~/ashay/docs/arp $ arp -a
+? (10.2.56.1) at 00:1d:45:55:2e:3f [ether] on eth0 
+? (10.2.58.136) at 74:27:ea:a4:12:8b [ether] on eth0
+
+#ARP Command on cisco router   
+Router_sales#show arp 
+Protocol  Address          Age (min)  Hardware Addr   Type   Interface
+Internet  10.0.0.1                -   c401.0f00.0000  ARPA   FastEthernet0/0
+</pre>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Type of ARP packet</h2>
+<div class="outline-text-2" id="text-2">
+
+
+</div>
+
+<div id="outline-container-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> ARP request packet</h3>
+<div class="outline-text-3" id="text-2-1">
+
+<p>   ARP request packet is sent by the device to request for the MAC
+   address of device, whose IP address is known. <br/>
+   ARP request packet is always a broadcast.
+</p></div>
+
+</div>
+
+<div id="outline-container-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> ARP response packet</h3>
+<div class="outline-text-3" id="text-2-2">
+
+<p>   ARP response packet is sent by the device, whose MAC address is
+   demanded in ARP request packet. <br/>
+   ARP response packet is always a unicast.
+</p>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> ARP Packet format</h2>
+<div class="outline-text-2" id="text-3">
+
+
+<div class="figure">
+<p><img src="./images/arp_packet.png"  alt="./images/arp_packet.png" /></p>
+<p>ARP packet format</p>
+</div>
+
+<p>  
+  Following are the important fields in an ARP packet - <br/>
+</p><ul>
+<li><code>Hardware Type</code>  <br/>
+    This field specifies the type of harware used for
+    transmitting ARP message.  For most of the time it is Ethernet
+    with value 0x00001.
+</li>
+<li><code>Protocol Type</code>  <br/>
+    This field specifies the type of layer 3 addresses used in the message.
+    IPv4 is the most common and is having value 0x0800.
+</li>
+<li><code>Hardware Address Length</code> <br/>
+    This specifies how long hardware addresses are in the message. 
+    It is having value 6.
+</li>
+<li><code>Protocol Address Length</code> <br/>
+    This specfies the length of layer 3 addresses in the message. It is 
+    having value 4.
+</li>
+<li><code>OP code</code> <br/>
+    This field is important as it mentions the type of ARP message.
+    Out of 9 possible values important ones are 1 for ARP request packet 
+    and 2 for ARP response packet.
+</li>
+<li><code>Sender Hardware Address</code> <br/>
+    The hardware address(MAC) if the device sending ARP message.
+</li>
+<li><code>Sender Protocol Address</code> <br/>
+    The IP address of the device sending this message.
+</li>
+<li><code>Target Hardware Address</code> <br/>
+    The hardware address(MAC) of device to whom this message is being sent to.
+</li>
+<li><code>Target Protocol Address</code> <br/>
+    The IP address of the device this message is being sent to.
+</li>
+</ul>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> ARP resolution Process</h2>
+<div class="outline-text-2" id="text-4">
+
+<p>  Complete process of obtaining MAC address of device can be represented in a sequence of steps. <br/>
+  Let us take a sample topology as given below -
+  </p>
+<div class="figure">
+<p><img src="./images/sample_topology.png"  alt="./images/sample_topology.png" /></p>
+<p>sample topology</p>
+</div>
+
+<p>
+  In the image given above, we have two computers connected to each other. 
+</p>
+
+
+<pre class="example">COMPUTER NAME - PC1
+MAC ADDRESS   - aa (assumed)
+IP ADDRESS    - 10.0.0.1 /8
+ARP Table     - Empty or cleared
+
+COMPUTER NAME - PC2
+MAC ADDRESS   - bb (assumed)
+IP ADDRESS    - 10.0.0.2 /8
+ARP Table     - Empty or cleared
+</pre>
+
+
+<p>
+  Let us see what happens, if PC1 wants to send some data to PC2(say ICMP echo request packet). <br/>
+</p>
+<ol>
+<li>You open the command prompt in PC1 and type "ping 10.0.0.2" and press Enter. <br/>
+</li>
+<li>PC1 will check whether the destination IP is in the same network or not. <br/>
+</li>
+<li>It will now check for the entry of 10.0.0.2 MAC address in ARP table.<br/>
+</li>
+<li>The entry of 10.0.0.2 in ARP table is not found. <br/>
+</li>
+<li>PC1 will start forming an ARP request packet. <br/>
+</li>
+<li>Considering some important fields of ARP packet, the ARP packet
+     formed by PC1 will look like the one given below -
+     <div class="figure">
+<p><img src="./images/arp_request_pack.jpg"  alt="./images/arp_request_pack.jpg" /></p>
+<p>ARp request packet</p>
+</div>
+
+</li>
+<li>Now this ARP packet is to be encapsulated in ethernet frame. <br/>
+</li>
+<li>As we know that an ARP request packet is always broadcasted, the
+     value for Destination MAC is a broadcast mac (ff:ff:ff:ff:ff:ff). <br/>
+     The Ethernet Frame formed will look like the one given below -
+</li>
+</ol>
+
+
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" /><col class="right" /><col class="left" /><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="left">ff:ff:ff:ff:ff:ff</td><td class="left">aa</td><td class="right">0x0806</td><td class="left">ARP request packet encapsulated</td><td class="left">checksum</td></tr>
+</tbody>
+</table>
+
+
+
+<ol>
+<li>PC2 will receive the Ethernet frame. It will accept it and will decapsulate the ARP Packet from it. <br/>
+</li>
+<li>It will now check the Ethernet Type value in frame, which is
+      0x0806. Hence it will come to know that frame contains ARP packet encapsulated in it. <br/>
+</li>
+<li>PC2 then will encapsulate the frame and will check (if My IP == Receiver's Protocol Address). Which is true here. <br/>
+</li>
+<li>It will then learn the MAC of PC1 by adding entry in  MAc address table. <br/>
+</li>
+<li>It will then check what type of ARP message is this. Since it is Request packet, it will form a response packet.  <br/>
+</li>
+<li>An ARP response packet formed by PC2 will have following values - <br/>
+<ul>
+<li>Hardware Type - Ethernet (1)
+</li>
+<li>Protocol Type - IPV4 (0x0800)
+</li>
+<li>HLEN - 6
+</li>
+<li>PLEN - 4
+</li>
+<li>Operation - Response(2)
+</li>
+<li>Sender's Hardware Address - bb( as PC2 is sending this)
+</li>
+<li>Sender's Protocol Address -  10.0.0.2 (as PC2 is sending this)
+</li>
+<li>Receiver's Hardware Address - aa (as PC2 knows who is requesting for MAC)
+</li>
+<li>Receiver's Protocol Address - 10.0.0.1 (as Pc2 knows who is requesting for MAC)
+</li>
+</ul>
+
+</li>
+<li>This ARP respons message will also be carried in ethernet frame.<br/>
+</li>
+<li>PC2 will form an ethernet frame with following value -
+<ul>
+<li>DMAC - aa(PC1)
+</li>
+<li>SMAC - bb(PC2)
+</li>
+<li>Ethernet type - 0x0806
+</li>
+<li>Data - Encapsulated ARP response message
+</li>
+<li>Some checksum value 
+</li>
+</ul>
+
+</li>
+<li>PC1 will receive this frame and hence ARP process completes.
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: March 12, 2016</p>
+<p class="author">Author: Ashay Maheshwari</p>
+<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>
