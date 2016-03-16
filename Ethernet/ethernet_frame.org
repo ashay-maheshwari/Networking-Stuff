@@ -2,7 +2,7 @@
 #+Date: March 11, 2016
 #+Author: Ashay Maheshwari
 
-* Ethernet frame
+* Ethernet frame Structure
 For what Ethernet is , I would like you to visit http://searchnetworking.techtarget.com/definition/Ethernet.
 What more important is to understand what are the fields/sections of Ethernet frame. \\
 See the image given below -
